@@ -21,10 +21,10 @@
 		<cassandra-java-driver.version>4.9.0</cassandra-java-driver.version>
 		<cassandra-native-protocol.version>1.4.11</cassandra-native-protocol.version>
 		<springfox.version>3.0.0</springfox.version>
+		<jkube.version>1.0.2</jkube.version>
 		<slf4j.version>1.7.30</slf4j.version>
 		<spring-cloud.version>Hoxton.SR8</spring-cloud.version>
-		<lombok.version>1.18.12</lombok.version>
-		<maven.test.skip>true</maven.test.skip>
+		<maven.test.skip>false</maven.test.skip>
 	</properties>
 
 	<!-- Enabling SpringCloud features -->
@@ -86,11 +86,16 @@
             <artifactId>micrometer-registry-prometheus</artifactId>
         </dependency>
         
+        <!-- Custom keys in application.yaml -->
+        <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+		</dependency>
+		
         <!-- Reduce Boilerplate code in POJO -->
         <dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>${lombok.version}</version>
 		</dependency>
 
 		<!-- Driver (overriding spring defaults) -->
@@ -156,15 +161,15 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 			<exclusions>
-				<exclusion>
-					<groupId>junit</groupId>
-					<artifactId>junit</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.vaadin.external.google</groupId>
-					<artifactId>android-json</artifactId>
-				</exclusion>
-			</exclusions>
+		        <exclusion>
+		          <groupId>org.junit.vintage</groupId>
+		          <artifactId>junit-vintage-engine</artifactId>
+		        </exclusion>
+		        <exclusion>
+		          <groupId>com.vaadin.external.google</groupId>
+		          <artifactId>android-json</artifactId>
+		        </exclusion>
+		    </exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.assertj</groupId>
@@ -227,7 +232,17 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+	     		 <layers>
+                  <enabled>true</enabled>
+                 </layers>
+                </configuration>
 			</plugin>
+			<plugin>
+        		<groupId>org.eclipse.jkube</groupId>
+        		<artifactId>kubernetes-maven-plugin</artifactId>
+        		<version>${jkube.version}</version>
+      		</plugin>
 		</plugins>
 	</build>
 
