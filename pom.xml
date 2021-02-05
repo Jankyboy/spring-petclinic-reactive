@@ -18,7 +18,7 @@
 		<java.version>11</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<cassandra-java-driver.version>4.9.0</cassandra-java-driver.version>
+		<cassandra-java-driver.version>4.10.0</cassandra-java-driver.version>
 		<cassandra-native-protocol.version>1.4.11</cassandra-native-protocol.version>
 		<springfox.version>3.0.0</springfox.version>
 		<slf4j.version>1.7.30</slf4j.version>
